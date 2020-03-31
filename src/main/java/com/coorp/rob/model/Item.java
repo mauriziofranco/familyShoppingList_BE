@@ -5,22 +5,32 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Item {
 
-	private String name;
+	private String itemName;
+	
+	private boolean itemTaken;
 	
 	public Item() {
 		super();
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String itemName) {
+		this.itemName = itemName;
 	}
 	
 	public String getName() {
-		return this.getName();
+		return this.itemName;
+	}
+
+	public boolean isTaken() {
+		return itemTaken;
+	}
+
+	public void setTaken(boolean itemTaken) {
+		this.itemTaken = itemTaken;
 	}
 
 	@Override
 	public String toString() {
-		return "Item [name=" + name + "]";
+		return "Item [name=" + this.itemName + ", taken=" + this.itemTaken + "]";
 	}
 }

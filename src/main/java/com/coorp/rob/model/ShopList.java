@@ -11,6 +11,12 @@ public class ShopList {
 	@Id
 	private String id;
 	
+	private List<Item> itemList;
+	
+	public ShopList() {
+		super();
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -19,22 +25,16 @@ public class ShopList {
 		this.id = id;
 	}
 
-	public List<Item> getListIem() {
-		return listIem;
+	public List<Item> getItemList() {
+		return itemList;
 	}
 
-	public void setListIem(List<Item> listIem) {
-		this.listIem = listIem;
-	}
-
-	private List<Item> listIem;
-	
-	public ShopList() {
-		super();
+	public void setItemList(List<Item> itemList) {
+		this.itemList = itemList;
 	}
 
 	@Override
 	public String toString() {
-		return "ShopList [id=" + id + ", listIem=" + listIem + "]";
-	}
+		return "ShopList [id=" + id + ", itemList=" + itemList + "]";
+	}	
 }
