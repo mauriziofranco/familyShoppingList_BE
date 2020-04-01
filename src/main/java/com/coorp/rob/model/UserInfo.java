@@ -1,8 +1,19 @@
 package com.coorp.rob.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.annotation.Transient;
+
+/**
+ * @author Roberto
+ * 
+ * */
 public class UserInfo {
+
+	// Specifica che la proprietà o il campo non è persistente. 
+	@Transient
+	private Logger log = LoggerFactory.getLogger(UserInfo.class);
 	
 	private String name;
 	

@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * @author Roberto
+ * 
+ * */
 @Document(value = "ShopList")
 public class ShopList {
 
