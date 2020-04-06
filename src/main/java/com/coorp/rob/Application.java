@@ -13,17 +13,17 @@ import com.coorp.rob.model.Item;
 import com.coorp.rob.model.ShopList;
 import com.coorp.rob.model.User;
 import com.coorp.rob.model.UserInfo;
-import com.coorp.rob.repository.ShopListRepository;
-import com.coorp.rob.repository.UserRepository;
+import com.coorp.rob.service.ShopListService;
+import com.coorp.rob.service.UserService;
 
 @SpringBootApplication
 public class Application {
 
 	@Autowired
-	private ShopListRepository shopListRepo;
+	private ShopListService shopListService;
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -33,35 +33,40 @@ public class Application {
 	 public CommandLineRunner runner() {
 		 return (args) ->{
 			 Item item1 = new Item();
-			 item1.setName("latte");
-			 item1.setTaken(false);
+			 item1.setItemName("miele");
+			 item1.setItemTaken(false);
 			 
 			 Item item2 = new Item();
-			 item2.setName("uova");
-			 item2.setTaken(true);
+			 item2.setItemName("banane");
+			 item2.setItemTaken(true);
 			 
-			 List<Item> list = new ArrayList();
+			 List<Item> list = new ArrayList<Item>();
 			 list.add(item1);
 			 list.add(item2);
 			 
+			 String idList = "ayyyt1123";
 			 ShopList shopList = new ShopList();
-			 shopList.setId("axxxx1123");
+			 shopList.setId(idList);
 			 shopList.setItemList(list);
 
-			 shopListRepo.save(shopList);
+			 shopListService.saveShopList(shopList);
 			 
 			 UserInfo userInfo = new UserInfo();
-			 userInfo.setName("Roberto");
-			 userInfo.setSurname("Amato");
-			 userInfo.setCitta("Licata");
-			 userInfo.setIdListItem("xivvx21");
-			 userInfo.setCap("92027");
+			 userInfo.setName("Paolo");
+			 userInfo.setSurname("Pilla");
+			 userInfo.setCitta("Torino");
+			 userInfo.setIdListItem(idList);
+			 userInfo.setCap("90089");
 			 
+			 String userEmail = "apila@ymail.it";
+			 String password = "1234";
 			 User user = new User();
-			 user.setUserEmail("robertoxx93@libero.it");
+			 user.setUserEmail(userEmail);
+			 user.setPassword(password);
 			 user.setUserInfo(userInfo);
 		
-			 userRepository.save(user);
+			 userService.saveUser(user);
+			 
 		 };
 	 }
 }

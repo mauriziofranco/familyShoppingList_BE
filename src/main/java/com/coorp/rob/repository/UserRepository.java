@@ -10,5 +10,7 @@ import com.coorp.rob.model.User;
 @Repository
 public interface UserRepository extends MongoRepository<User, String>{
 
-	public Optional<User> findByUserEmail(String userEmail);
+	public Optional<User> findByUserEmail(String userEmail);	
+
+	public Optional<User> findByUserEmailAndPassword(String userEmail, String password);	
 }

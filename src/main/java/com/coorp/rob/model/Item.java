@@ -12,20 +12,20 @@ public class Item {
 	public Item() {
 		super();
 	}
-	
-	public void setName(String itemName) {
-		this.itemName = itemName;
-	}
-	
-	public String getName() {
-		return this.itemName;
+
+	public String getItemName() {
+		return itemName;
 	}
 
-	public boolean isTaken() {
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public boolean isItemTaken() {
 		return itemTaken;
 	}
 
-	public void setTaken(boolean itemTaken) {
+	public void setItemTaken(boolean itemTaken) {
 		this.itemTaken = itemTaken;
 	}
 
