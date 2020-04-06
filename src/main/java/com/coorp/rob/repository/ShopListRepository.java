@@ -11,5 +11,4 @@ import com.coorp.rob.model.ShopList;
 public interface ShopListRepository extends MongoRepository<ShopList, String>{
 	
 	  public Optional<ShopList> findById(String id);
-	  	  
 }

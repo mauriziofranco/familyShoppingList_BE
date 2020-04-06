@@ -1,5 +1,6 @@
 package com.coorp.rob.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -19,6 +20,7 @@ public class ShopList {
 	
 	public ShopList() {
 		super();
+		this.itemList = new ArrayList<Item>();
 	}
 
 	public String getId() {

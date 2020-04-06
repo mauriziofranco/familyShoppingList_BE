@@ -56,7 +56,7 @@ public class UserRestController {
 	/**
 	 * 
 	 * */
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public ResponseEntity<ResponseMessage> saveUser(@RequestBody User user){
 		log.info("method save(@RequestBody User user) - START\n\n" + 
 				  "\t PARAMS: {\n" + 

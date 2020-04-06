@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coorp.rob.dto.ResponseMessage;
+import com.coorp.rob.dto.UserShoppingListDto;
 import com.coorp.rob.model.ShopList;
+import com.coorp.rob.service.ItemService;
 import com.coorp.rob.service.ShopListService;
 
 /**
@@ -30,6 +32,8 @@ public class ShopListRestController {
 	@Autowired
 	private ShopListService shopListService;
 	
+	@Autowired
+	private ItemService itemService;
 	
 	/**
 	 * 
@@ -57,11 +61,11 @@ public class ShopListRestController {
 	/**
 	 * 
 	 * */
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public ResponseEntity<ResponseMessage> saveShopList(@RequestBody ShopList shopList){
 		log.info("method save(@RequestBody UserShoppingList userShoppingList) - START\n\n" + 
 				  "\t PARAMS: {\n" + 
-				  					"\t  1:" + shopList.toString() +
+				  					"\t  1:    " + shopList.toString() +
 				  			  "\n\t}\n\n"); 
 		ResponseEntity<ResponseMessage> responseToFrontEnd = null;
 		ResponseMessage respMessage = new ResponseMessage();
@@ -78,14 +82,34 @@ public class ShopListRestController {
 			respMessage.setMessage("shop-list not created");
 			responseToFrontEnd = new ResponseEntity<ResponseMessage>(respMessage,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		log.info("method getShopList(@PathVariable String id) - RETURN" +
-				 "\t {\n" + 
-				 	"\t  responseEntity-headers:" + responseToFrontEnd.getHeaders().toString() +
-				 	"\t  responseEntity-statuCode:" + responseToFrontEnd.getStatusCode().toString() +				 	
-					"\t  responseEntity-body:" + responseToFrontEnd.getBody().toString() +
-			    "\n\t}\n\n"); 
 		log.info("method save(@RequestBody UserShoppingList userShoppingList) - END"); 
+		return responseToFrontEnd;
+	}
+	
+
+	/**
+	 * 
+	 * */
+	@RequestMapping(value = "/save/items", method = RequestMethod.POST)
+	public ResponseEntity<ResponseMessage> saveItemInShopList(@RequestBody UserShoppingListDto useShoppingListDto){
+		log.info("method saveItemInShopList(@RequestBody UserShoppingList userShoppingList) - START\n\n" + 
+				  "\t PARAMS: {\n" + 
+				  					"\t  1:   " + useShoppingListDto.getEmail() + ", " + useShoppingListDto.getItems()[0] + 
+				  			  "\n\t}\n\n"); 
+		ResponseEntity<ResponseMessage> responseToFrontEnd = null;
+		ResponseMessage respMessage = new ResponseMessage();
+		
+		// retrieved shoplist and put items
+		boolean saved = this.itemService.saveItemInShopList(useShoppingListDto);
+		if( saved ) {
+			respMessage.setMessage("item saved succesfull");
+			responseToFrontEnd = new ResponseEntity<ResponseMessage>(HttpStatus.OK);
+		}
+		else {
+			respMessage.setMessage("item  not saved ");
+			responseToFrontEnd = new ResponseEntity<ResponseMessage>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		log.info("method saveItemInShopList(@RequestBody UserShoppingList userShoppingList) - END"); 
 		return responseToFrontEnd;
 	}
 

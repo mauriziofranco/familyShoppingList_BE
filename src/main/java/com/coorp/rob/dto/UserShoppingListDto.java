@@ -1,7 +1,5 @@
 package com.coorp.rob.dto;
 
-import java.util.Arrays;
-
 import com.coorp.rob.model.Item;
 
 public class UserShoppingListDto {
@@ -32,6 +30,6 @@ public class UserShoppingListDto {
 
 	@Override
 	public String toString() {
-		return "UserShoppingList [email=" + email + ", items=" + Arrays.asList(this.items) + "]";
+		return "UserShoppingList [email=" + email + ", items="  + "]";
 	}
 }
