@@ -38,27 +38,18 @@ public class ShopListRestController {
 	public ResponseEntity<ShopList> getShopList(@PathVariable String id){
 		log.info("method  getShopList(@PathVariable String id) - START\n\n" + 
 				  "\t PARAMS: {\n" + 
-				  					"\t  1:" + id +
+				  					"\t  1:    "+  "("+ id.getClass().getSimpleName() +")"+ id +
 				  			  "\n\t}\n\n"); 
 		
 		Optional<ShopList> shopList = this.shopListService.getShopListById(id);
-		log.error("method getShopList(@PathVariable String id) - DEBUG\n\n" + 
-				  "\t {\n" + 
-				  		"\t  shopList: " + shopList.isPresent() != null?shopList.get().toString():"null" + 
-				  "\n\t}\n\n");
+		
 		ResponseEntity<ShopList> responseToFrontEnd = null;
-		if(!shopList.isPresent()) {
-			responseToFrontEnd = new ResponseEntity<ShopList>(shopList.get(),HttpStatus.NOT_FOUND);
-		}
-		else {
+		if(!shopList.isPresent()) 
+			responseToFrontEnd = new ResponseEntity<ShopList>(HttpStatus.NOT_FOUND);
+		
+		else 
 			responseToFrontEnd = new ResponseEntity<ShopList>(shopList.get(), HttpStatus.OK);
-		}
-		log.info("method getShopList(@PathVariable String id) - RETURN" +
-				 "\t {\n" + 
-				 	"\t  responseEntity-headers:" + responseToFrontEnd.getHeaders().toString() +
-				 	"\t  responseEntity-statuCode:" + responseToFrontEnd.getStatusCode().toString() +				 	
-					"\t  responseEntity-body:" + responseToFrontEnd.getBody().toString() +
-			     "\n\t}\n\n"); 
+		
 		log.info("method getShopList(@PathVariable String id) - END");
 		return responseToFrontEnd;
 	}

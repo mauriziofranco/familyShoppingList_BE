@@ -30,14 +30,22 @@ public class ShopListService {
 	public Optional<ShopList> getShopListById(String id) {
 		 log.info("method getShopListById(String id) - START\n\n" + 
 				  "\t PARAMS: {\n" + 
-				  					"\t  1:" + id +
+				  					"\t    1:" +  "    ("+ id.getClass().getSimpleName() +")"+ id +
 				  			  "\n\t}\n\n"); 
 		
 		 Optional<ShopList> shopListRetrieved = this.shopList.findById(id);
-		 log.info("method getShopListById(String id) - RETURN\n\n" +
-				 "\t {\n" + 
-					"\t  shopList: " + shopListRetrieved.isPresent() != null?shopListRetrieved.get().toString():"null" +
-				 "\n\t}\n\n"); 
+		 if(shopListRetrieved.isPresent()) {
+			 log.info("method getShopListById(String id) - RETURN\n\n" +
+					 "\t {\n" + 
+						"\t   shopList:    " + shopListRetrieved.get() +
+					 "\n\t}\n\n"); 
+		 }
+		 else {
+			 log.info("method getShopListById(String id) - RETURN\n\n" +
+					 "\t {\n" + 
+						"\t    shopList:    " + shopListRetrieved +
+					 "\n\t}\n\n"); 		 }
+	
 		 log.info("method getShopListById(String id) - END");
 		 return shopListRetrieved;
 	}
@@ -49,7 +57,7 @@ public class ShopListService {
 	public boolean saveShopList(ShopList shopList) {
 		 log.info("method saveShopList(ShopList shopList) - START\n\n" + 
 				  "\t PARAMS: {\n" + 
-				  					"\t  1:" + shopList.toString() +
+				  					"\t  1:    " + shopList.toString() +
 				  			  "\n\t}\n\n"); 
 		
 		 boolean saved = true;
@@ -59,23 +67,23 @@ public class ShopListService {
 			 sl = this.shopList.save(shopList);
 			 log.error("method saveShopList(ShopList shopList) - DEBUG\n\n" + 
 					  "\t item-saved:{\n" + 
-	  						"\t  shopListId:" + sl.getId() +
-	  						"\t  shopListNumberItems:" + sl.getItemList().size() +
-	  						"\t  shopListItems:" + sl.getItemList() +
+	  						"\t  shopListId:    " + sl.getId() +
+	  						"\t  shopListNumberItems:    " + sl.getItemList().size() +
+	  						"\t  shopListItems:    " + sl.getItemList() +
 					  "\n\t}\n\n"); 
 		 }catch(IllegalArgumentException ex) {
 			 saved = false;
 			 log.error("method saveShopList(ShopList shopList) - ERROR\n\n" + 
 					  "\t {\n" + 
-	  						"\t  error-message:" + ex.getMessage() +
-	  						"\t  error-cause:" + ex.getCause() +
-	  						"\t  error-stackTrace:" + ex.getStackTrace() +
+	  						"\t  error-message:    " + ex.getMessage() +
+	  						"\t  error-cause    :" + ex.getCause() +
+	  						"\t  error-stackTrace:    " + ex.getStackTrace() +
 					  "\n\t}\n\n"); 
 			 ex.printStackTrace();
 		 }
 		 log.info("methodsaveShopList(ShopList shopList) - RETURN\n\n" +
 				 "\t {\n" + 
-					"\t  saved: " + saved +
+					"\t  saved:    " + saved +
 				 "\n\t}\n\n"); 
 		 log.info("method saveShopList(ShopList shopList) - END");
 		 return saved;
