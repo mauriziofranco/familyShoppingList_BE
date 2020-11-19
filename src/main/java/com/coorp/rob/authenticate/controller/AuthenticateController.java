@@ -1,7 +1,5 @@
 package com.coorp.rob.authenticate.controller;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +38,8 @@ public class AuthenticateController {
 		log.info("method login(@RequestBody LoginInputDto body) - PARAM: body = { " + body.getEmail() + ", " + body.getPassword() + " }");
 		
 		ResponseEntity<?> responseEntity = null;
-		Optional<User> user = this.userService.getUserByEmailAndPassword(body.getEmail(), body.getPassword());
-		if(!user.isPresent()) {
+		User user = this.userService.getUserByEmailAndPassword(body.getEmail(), body.getPassword());
+		if(user==null) {
 			responseEntity = ResponseEntity.badRequest().build();
 			log.info("method login(@RequestBody LoginInputDto body) - DEBUG: responseEntity = " + responseEntity.getStatusCode()); 
 

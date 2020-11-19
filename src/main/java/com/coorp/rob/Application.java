@@ -2,7 +2,10 @@ package com.coorp.rob;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +22,8 @@ import com.coorp.rob.service.UserService;
 @SpringBootApplication
 public class Application {
 
+	private static Logger log = LoggerFactory.getLogger(Application.class);
+	
 	@Autowired
 	private ShopListService shopListService;
 	
@@ -66,6 +71,9 @@ public class Application {
 			 user.setUserInfo(userInfo);
 		
 			 userService.saveUser(user);
+			 
+			 Optional<User> returns = userService.getUserByEmail(userEmail);
+			 log.info("Returning: " + returns.get());
 			 
 		 };
 	 }

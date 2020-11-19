@@ -33,13 +33,8 @@ public class UserService {
 	 * 
 	 * */
 	public Optional<User> getUserByEmail(String email) {
-		 log.info("method getUserById(String email) - START\n\n" + 
-				  "\t PARAMS: {\n" + 
-				  					"\t  1:" + email +
-				  			  "\n\t}\n\n"); 
-		
+		log.info("getUserByEmail - START - receiving{ email: " + email);
 		 Optional<User> userRetrieved = this.userRepository.findById(email);
-		
 		 return userRetrieved;
 	}
 	
@@ -47,20 +42,14 @@ public class UserService {
 	 * 
 	 * 
 	 * */
-	public Optional<User> getUserByEmailAndPassword(String email, String password) {
-		 log.info("method getUserByEmailAndPassword(String email, String password) - START\n\n" + 
-				  "\t PARAMS: {\n" + 
-				  					"\t  1:" + email +
-				  					"\t  2:" + password +
-				  			  "\n\t}\n\n"); 
-		
-		 Optional<User> userRetrieved = this.userRepository.findByUserEmailAndPassword(email, password);
-		 log.info("method getUserByEmailAndPassword(String email, String password) - RETURN\n\n" +
-				 "\t {\n" + 
-					"\t  user: " + userRetrieved.isPresent() != null?userRetrieved.get().toString():"null" +
-				 "\n\t}\n\n"); 
-		 log.info("method getUserById(String id) - END");
-		 return userRetrieved;
+	public User getUserByEmailAndPassword(String email, String password) {
+		 log.info("getUserByEmailAndPassword - START - receiving{ email: " + email + "  e password: " + password + "}");
+//		 Optional<User> userRetrievedByEmail = this.userRepository.findByUserEmail(email);
+		 Optional<User> userRetrievedByEmail = getUserByEmail(email);
+		 log.info("getUserByEmailAndPassword - DEBUG - found by email isEmpty: " + userRetrievedByEmail.isEmpty());
+		 if (userRetrievedByEmail.isEmpty()) return null;
+		 if (!userRetrievedByEmail.get().getPassword().equals(password)) return null; //in this case I decide to do not return any results about email not found, 
+		 return userRetrievedByEmail.get() ;
 	}
 	
 	/**
