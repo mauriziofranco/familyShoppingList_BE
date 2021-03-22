@@ -1,5 +1,6 @@
 package com.coorp.rob.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -22,6 +23,18 @@ public class ShopListService {
 
 	@Autowired
 	private ShopListRepository shopList;
+	
+	/**
+	 * 
+	 * 
+	 * */
+	public List<ShopList> getShoppingList() {
+		 log.info("getShoppingList - START"); 
+		
+		 List<ShopList> list = this.shopList.findAll();
+		 log.info("getShoppingList - END - list.size(): " + list.size());
+		 return list;
+	}
 	
 	/**
 	 * 

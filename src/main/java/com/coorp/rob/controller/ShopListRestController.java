@@ -1,5 +1,6 @@
 package com.coorp.rob.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -34,6 +35,25 @@ public class ShopListRestController {
 	
 	@Autowired
 	private ItemService itemService;
+	
+	/**
+	 * 
+	 * */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ResponseEntity<List<ShopList>> getShoppingList(){
+		log.info("getShoppingList - START"); 
+		List<ShopList> list = this.shopListService.getShoppingList();
+		
+		ResponseEntity<List<ShopList>> responseToFrontEnd = null;
+//		if(!shopList.isPresent()) 
+//			responseToFrontEnd = new ResponseEntity<ShopList>(HttpStatus.NOT_FOUND);
+//		
+//		else 
+			responseToFrontEnd = new ResponseEntity<List<ShopList>>(list, HttpStatus.OK);
+		
+		log.info("method getShopList(@PathVariable String id) - END");
+		return responseToFrontEnd;
+	}
 	
 	/**
 	 * 
